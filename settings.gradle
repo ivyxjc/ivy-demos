@@ -1,0 +1,4 @@
+rootProject.name = 'ivy-demos'
+
+include "demo-common"
+include "netty-rpc"
