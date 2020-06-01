@@ -1,5 +1,6 @@
 rootProject.name = 'ivy-demos'
 
 include "demo-common"
+include "ivy-camp"
 include "netty-demo"
 include "netty-rpc"

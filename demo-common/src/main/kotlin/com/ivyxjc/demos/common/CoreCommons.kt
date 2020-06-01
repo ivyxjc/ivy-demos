@@ -9,5 +9,5 @@ fun <T> loggerFor(clz: Class<T>): Logger = LoggerFactory.getLogger(clz)
 
 fun loggerFor(clzName: String): Logger = LoggerFactory.getLogger(clzName)
 
-internal val topLevelClass = object : Any() {}.javaClass.enclosingClass
+internal val topLevelClass: Class<*> = object : Any() {}.javaClass
 
