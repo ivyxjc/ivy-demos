@@ -16,6 +16,7 @@ ext {
     activemq_version = '5.15.10'
     artemis_version = '2.10.0'
     aspectj_version = '1.9.5'
+    commons_io_version = '2.7'
     commons_lang3_version = '3.7'
     disruptor_version = '3.4.2'
     druid_version = '1.1.20'
@@ -52,7 +53,7 @@ ext {
 }
 
 
-configure(allprojects ) { project ->
+configure(allprojects) { project ->
     group = 'com.ivyxjc'
     version base_version
 
@@ -144,6 +145,7 @@ configure(allprojects ) { project ->
         implementation group: 'org.jetbrains.kotlin', name: 'kotlin-reflect', version: kotlin_version
         //apache
         implementation group: 'org.apache.commons', name: 'commons-lang3', version: commons_lang3_version
+        implementation group: 'commons-io', name: 'commons-io', version: commons_io_version
         //log
         implementation group: 'org.slf4j', name: 'slf4j-api', version: slf4j_version
         runtimeOnly group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: log4j_slf4j_version
@@ -153,6 +155,13 @@ configure(allprojects ) { project ->
 
         compileOnly group: 'org.jetbrains', name: 'annotations', version: jetbrains_annotations_version
         testCompileOnly group: 'org.jetbrains', name: 'annotations', version: jetbrains_annotations_version
+    }
+}
+
+project("ivy-camp") {
+    dependencies {
+        implementation project(":demo-common")
+        implementation group: 'xalan', name: 'xalan', version: '2.7.2'
     }
 }
 
