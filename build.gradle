@@ -41,6 +41,7 @@ ext {
     mybatis_starter_version = '2.1.0'
     mybatis_version = '3.5.4'
     mysql_connector_version = '8.0.19'
+    netty_version = '4.1.50.Final'
     okhttp_version = '4.0.1'
     protobuf_version = '3.11.4'
     slf4j_version = '1.7.25'
@@ -51,7 +52,7 @@ ext {
 }
 
 
-configure(allprojects) { project ->
+configure(allprojects ) { project ->
     group = 'com.ivyxjc'
     version base_version
 
@@ -72,6 +73,7 @@ configure(allprojects) { project ->
 
     buildDir = "${rootProject.projectDir.path}/build/${rootProject.name}/${project.name}"
 
+    sourceSets.main.resources.srcDirs += "${rootProject.projectDir.path}/src/main/resources"
     sourceSets.test.resources.srcDirs += "${rootProject.projectDir.path}/src/test/resources"
 
     task sourceJar(type: Jar) {
@@ -151,5 +153,19 @@ configure(allprojects) { project ->
 
         compileOnly group: 'org.jetbrains', name: 'annotations', version: jetbrains_annotations_version
         testCompileOnly group: 'org.jetbrains', name: 'annotations', version: jetbrains_annotations_version
+    }
+}
+
+project("netty-rpc") {
+    dependencies {
+        implementation project(":demo-common")
+        implementation group: 'io.netty', name: 'netty-all', version: netty_version
+    }
+}
+
+project("netty-demo") {
+    dependencies {
+        implementation project(":demo-common")
+        implementation group: 'io.netty', name: 'netty-all', version: netty_version
     }
 }
