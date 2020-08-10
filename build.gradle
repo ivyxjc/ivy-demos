@@ -158,6 +158,13 @@ configure(allprojects) { project ->
     }
 }
 
+project("akka-demo") {
+    dependencies {
+        implementation project(":demo-common")
+        implementation group: 'com.typesafe.akka', name: 'akka-actor_2.13', version: '2.6.8'
+    }
+}
+
 project("ivy-camp") {
     dependencies {
         implementation project(":demo-common")
