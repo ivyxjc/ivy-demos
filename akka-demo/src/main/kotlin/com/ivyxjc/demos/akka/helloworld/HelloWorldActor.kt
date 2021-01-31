@@ -30,6 +30,7 @@ class GreeterActor : UntypedAbstractActor() {
         if (message == GreeterActor.Msg.GREET) {
             println("Hello World")
             Thread.sleep(1000)
+            println("sender path ${sender.path()}")
             sender.tell(Msg.DONE, self)
         } else {
             unhandled(message)

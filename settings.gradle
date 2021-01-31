@@ -1,7 +1,9 @@
 rootProject.name = 'ivy-demos'
 
-include "demo-common"
-include "ivy-camp"
 include "akka-demo"
+include "demo-common"
+include "graphql-demo"
+include "ivy-camp"
+include "ktorm"
 include "netty-demo"
 include "netty-rpc"

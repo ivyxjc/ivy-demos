@@ -1,0 +1,22 @@
+server:
+    port: 8080
+
+spring:
+    datasource:
+        type: com.zaxxer.hikari.HikariDataSource
+        url: jdbc:postgresql://localhost:5432/ivyxjc
+        driver-class-name: org.postgresql.Driver
+        username: ivyxjc
+        password:
+        hikari:
+            pool-name: Hikari
+            auto-commit: false
+    jpa:
+        database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+        show-sql: true
+
+
+logging:
+    level:
+        ROOT: DEBUG
+        com.ivyxjc.demo.graphql: DEBUG

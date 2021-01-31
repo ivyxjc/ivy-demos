@@ -97,7 +97,7 @@
     </appenders>
 
     <loggers>
-        <root level="INFO" includeLocation="false">
+        <root level="DEBUG" includeLocation="false">
             <appender-ref ref="Console"/>
             <appender-ref ref="RollingFileInfo"/>
             <appender-ref ref="RollingFileWarn"/>

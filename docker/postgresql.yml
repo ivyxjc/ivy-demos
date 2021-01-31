@@ -1,0 +1,12 @@
+version: '2'
+services:
+    ivyxjc-postgresql:
+        image: postgres:12.3
+        # volumes:
+        #     - ~/volumes/jhipster/graphqlDemo/postgresql/:/var/lib/postgresql/data/
+        environment:
+            - POSTGRES_USER=ivyxjc
+            - POSTGRES_PASSWORD=
+            - POSTGRES_HOST_AUTH_METHOD=trust
+        ports:
+            - 5432:5432

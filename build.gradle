@@ -1,16 +1,19 @@
 plugins {
     id 'java'
-    id 'org.jetbrains.kotlin.jvm' version '1.3.70' apply false
-    id "org.springframework.boot" version '2.1.6.RELEASE' apply false
+    id 'org.jetbrains.kotlin.jvm' version '1.4.21' apply false
+    id 'org.jetbrains.kotlin.plugin.jpa' version '1.4.21' apply false
+    id 'org.jetbrains.kotlin.plugin.spring' version '1.4.21' apply false
     id "me.champeau.gradle.jmh" version "0.4.8" apply false
     id "io.freefair.aspectj" version "5.0.0-rc6" apply false
     id "io.morethan.jmhreport" version "0.9.0" apply false
+    id "org.springframework.boot" version "2.4.2" apply false
+    id "io.spring.dependency-management" version "1.0.11.RELEASE" apply false
 }
 
 ext {
     base_version = '0.0.1-SNAPSHOT'
 
-    kotlin_version = '1.3.71'
+    kotlin_version = '1.4.21'
     kotlin_coroutine_version = '1.3.5'
 
     activemq_version = '5.15.10'
@@ -34,6 +37,7 @@ ext {
     junit_platform_version = '1.6.2'
     junit_jupiter_version = "5.6.2"
     kafka_client_version = '2.3.0'
+    ktorm_version = "3.2.0"
     log4j_slf4j_version = '2.11.2'
     lombok_version = '1.18.4'
     mockito_kotlin_version = '1.6.0'
@@ -104,14 +108,14 @@ configure(allprojects) { project ->
 
     compileKotlin {
         kotlinOptions {
-            jvmTarget = "1.8"
+            jvmTarget = "11"
             freeCompilerArgs = ["-Xallow-result-return-type", "-Xjsr305=strict"]
         }
     }
 
     compileTestKotlin {
         kotlinOptions {
-            jvmTarget = "1.8"
+            jvmTarget = "11"
             freeCompilerArgs = ["-Xallow-result-return-type", "-Xjsr305=strict"]
         }
     }
@@ -169,6 +173,40 @@ project("ivy-camp") {
     dependencies {
         implementation project(":demo-common")
         implementation group: 'xalan', name: 'xalan', version: '2.7.2'
+    }
+}
+
+project("graphql-demo") {
+
+    apply plugin: "org.jetbrains.kotlin.plugin.jpa"
+    apply plugin: "org.jetbrains.kotlin.plugin.spring"
+    apply plugin: "org.springframework.boot"
+    apply plugin: "io.spring.dependency-management"
+
+    dependencies {
+        implementation project(":demo-common")
+
+        implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+        implementation("org.springframework.boot:spring-boot-starter-jdbc")
+        implementation("org.springframework.boot:spring-boot-starter-web")
+        implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+        implementation("org.jetbrains.kotlin:kotlin-reflect")
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+        runtimeOnly("org.postgresql:postgresql")
+
+        developmentOnly("org.springframework.boot:spring-boot-devtools")
+
+        testImplementation("org.springframework.boot:spring-boot-starter-test")
+    }
+
+}
+
+project("ktorm") {
+    dependencies {
+        implementation project(":demo-common")
+        implementation group: "org.ktorm", name: "ktorm-core", version: ktorm_version
+        implementation group: "org.ktorm", name: "ktorm-support-mysql", version: ktorm_version
+        implementation group: "mysql", name: "mysql-connector-java", version: mysql_connector_version
     }
 }
 
